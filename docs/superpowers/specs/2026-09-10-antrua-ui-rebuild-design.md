@@ -1,7 +1,7 @@
 # AnTrua (QLTD v2) — Design: UI/UX rebuild + stack
 
 **Ngày:** 2026-09-10  
-**Trạng thái:** Chờ user review  
+**Trạng thái:** Approved (user 2026-09-10)  
 **Nguồn domain/schema:** `doc-rebuild/` (giữ SQLite + công thức nợ)  
 **Nguồn visual:** `Design.md` (Attio tokens)
 
