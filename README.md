@@ -1,39 +1,36 @@
-# AnTrua (QLTD v2)
+# AnTrua
 
-Rewrite UI/UX **Quản Lý Ăn Trưa** — Next.js + Attio/shadcn + Drizzle + SQLite cũ.
+Rewrite UI/UX **Quản Lý Ăn Trưa (QLTD)** — Next.js + Attio/shadcn + Drizzle + SQLite cũ.
 
-## Cho người & AI
-
-| File | Việc |
-|------|------|
-| [`AGENTS.md`](./AGENTS.md) | **Đọc trước** — skill, UI rules, nghiệp vụ, phase |
-| [`design-system/MASTER.md`](./design-system/MASTER.md) | Token & pattern UI |
-| [`Design.md`](./Design.md) | Attio raw |
-| [`doc-rebuild/`](./doc-rebuild/) | Schema + công thức nợ |
-| [`docs/superpowers/specs/`](./docs/superpowers/specs/) | Spec đã duyệt |
-| [`docs/superpowers/plans/`](./docs/superpowers/plans/) | Plan P0 |
-
-## Setup nhanh
+## Dev
 
 ```bash
 cp .env.example .env.local
-# điền ANTRUA_SQLITE_PATH + SESSION_PASSWORD
-```
+# ANTRUA_SQLITE_PATH + SESSION_PASSWORD (≥32 ký tự)
 
-Khi đã có app (sau P0):
-
-```bash
 npm install
+node scripts/seed-dev-db.mjs   # nếu chưa có DB cũ
 npm run dev
-node scripts/check-ui-conventions.mjs
 ```
 
-Chưa scaffold? Nói với agent: **"chạy dự án"** hoặc **"bắt đầu P0"** — xem `.agent/skills/run-dev/SKILL.md`.
-
-## Check UI (không cần Next)
+Seed mặc định: `ngotiendat` / `123456` (SuperAdmin).
 
 ```bash
+npm test
+npm run build
 node scripts/check-ui-conventions.mjs
 ```
 
-Hiện OK nếu chưa có `app/` / `components/` (không có file để scan).
+## Tài liệu
+
+| File | Việc |
+|------|------|
+| [`AGENTS.md`](./AGENTS.md) | Skill, UI rules, nghiệp vụ, phase |
+| [`design-system/MASTER.md`](./design-system/MASTER.md) | Token & pattern UI |
+| [`doc-rebuild/`](./doc-rebuild/) | Schema + công thức nợ |
+| [`docs/superpowers/plans/`](./docs/superpowers/plans/) | Plan P0+ |
+
+## Ghi chú môi trường
+
+- Node **22.5.1**: pin `better-sqlite3@11` (v13 segfault trên bản Node này). Nâng Node ≥22.9 khuyến nghị.
+- Không commit `.env.local` / `*.db`.

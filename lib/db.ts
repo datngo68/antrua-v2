@@ -1,9 +1,23 @@
 import Database from "better-sqlite3";
-import { drizzle } from "drizzle-orm/better-sqlite3";
-import * as schema from "./schema/users";
+import { drizzle, type BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
+import { users } from "./schema/users";
 
-const path = process.env.ANTRUA_SQLITE_PATH;
-if (!path) throw new Error("ANTRUA_SQLITE_PATH is required");
+type Schema = { users: typeof users };
 
-const sqlite = new Database(path);
-export const db = drizzle(sqlite, { schema: { users: schema.users } });
+const globalForDb = globalThis as unknown as {
+  __antruaDb?: BetterSQLite3Database<Schema>;
+};
+
+function createDb() {
+  const path = process.env.ANTRUA_SQLITE_PATH;
+  if (!path) throw new Error("ANTRUA_SQLITE_PATH is required");
+  const sqlite = new Database(path);
+  return drizzle(sqlite, { schema: { users } });
+}
+
+export const db: BetterSQLite3Database<Schema> =
+  globalForDb.__antruaDb ?? createDb();
+
+if (process.env.NODE_ENV !== "production") {
+  globalForDb.__antruaDb = db;
+}
