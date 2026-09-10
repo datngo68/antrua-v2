@@ -3,12 +3,14 @@ node_modules/
 
 # next
 .next/
+.next-*/
 out/
+.vercel/
 
-# env
+# env / secrets
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 
 # db
 data/*.db
@@ -29,11 +31,13 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 
-# gitnexus local index (regenerate)
+# agent / local scratch
+.superpowers/
+.worktrees/
+worktrees/
 .gitnexus/
 
 # typescript
-next-env.d.ts
 *.tsbuildinfo
 
 # test
