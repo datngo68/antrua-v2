@@ -2,9 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { SpinnerGap } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
 export function LoginForm() {
   const router = useRouter();
@@ -38,20 +40,29 @@ export function LoginForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="flex w-full max-w-sm flex-col gap-4">
-      <div className="flex flex-col gap-1.5">
-        <Label htmlFor="username">Tên đăng nhập</Label>
+    <form onSubmit={onSubmit} className="flex w-full flex-col gap-5">
+      <div className="flex flex-col gap-2">
+        <Label htmlFor="username" className="text-foreground">
+          Tên đăng nhập
+        </Label>
         <Input
           id="username"
           name="username"
           autoComplete="username"
+          autoFocus
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          aria-invalid={!!error}
           required
+          className="h-11 rounded-md bg-background px-3 text-sm"
+          placeholder="vd. ngotiendat"
         />
       </div>
-      <div className="flex flex-col gap-1.5">
-        <Label htmlFor="password">Mật khẩu</Label>
+
+      <div className="flex flex-col gap-2">
+        <Label htmlFor="password" className="text-foreground">
+          Mật khẩu
+        </Label>
         <Input
           id="password"
           name="password"
@@ -59,29 +70,48 @@ export function LoginForm() {
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          aria-invalid={!!error}
           required
+          className="h-11 rounded-md bg-background px-3 text-sm"
+          placeholder="••••••••"
         />
       </div>
-      <label className="flex items-center gap-2 text-sm text-muted">
+
+      <label className="flex min-h-11 cursor-pointer items-center gap-2.5 text-sm text-muted">
         <input
           type="checkbox"
           checked={remember}
           onChange={(e) => setRemember(e.target.checked)}
-          className="size-4 accent-primary"
+          className="size-4 rounded border-border accent-primary"
         />
-        Ghi nhớ đăng nhập
+        Ghi nhớ đăng nhập trên thiết bị này
       </label>
+
       {error ? (
-        <p role="alert" className="text-sm text-destructive">
+        <p
+          role="alert"
+          className="rounded-md border border-destructive/20 bg-destructive/5 px-3 py-2 text-sm text-destructive"
+        >
           {error}
         </p>
       ) : null}
+
       <Button
         type="submit"
         disabled={loading}
-        className="active:scale-[0.98]"
+        size="lg"
+        className={cn(
+          "h-11 w-full rounded-md text-sm font-semibold active:scale-[0.98]",
+        )}
       >
-        {loading ? "Đang đăng nhập…" : "Đăng nhập"}
+        {loading ? (
+          <span className="inline-flex items-center gap-2">
+            <SpinnerGap className="size-4 animate-spin" />
+            Đang đăng nhập…
+          </span>
+        ) : (
+          "Đăng nhập"
+        )}
       </Button>
     </form>
   );
