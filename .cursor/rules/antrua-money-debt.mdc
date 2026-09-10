@@ -1,0 +1,27 @@
+---
+description: AnTrua — công thức nợ/thanh toán/split; lệch số = bug
+globs: lib/**/*debt*,lib/**/*payment*,lib/**/*expense*,lib/**/*split*,app/**/payments/**/*,app/**/expenses/**/*,doc-rebuild/**
+alwaysApply: false
+---
+
+# AnTrua — Money / Debt
+
+Trước khi sửa logic tiền: đọc `doc-rebuild/05-debt-payments.md` + `doc-rebuild/09-invariants-checklist.md` (+ `04-expenses.md` nếu split).
+
+## Bất biến
+
+- `ExpenseParticipant.Amount == null` = chia đều / phần còn lại — **không** đổi thành 0.
+- FIFO + netting theo docs — không bịa công thức.
+- Payment status string: `Pending` | `Confirmed` (không enum DB mới).
+- Làm tròn: share thường `Round(..., 2)`; Pending/QR/webhook hay `Ceiling` — bám code/docs cũ.
+- Dashboard có thể khác Report (Pending) — **không** “sửa khớp” im lặng; ghi chú / hỏi user.
+
+## Test
+
+- Mọi thay đổi debt/payment/split: TDD + fixture cùng DB nếu có.
+- Acceptance: số khớp app cũ trên cùng dữ liệu = điều kiện merge P2.
+
+## Scope
+
+- Không thêm unique/constraint schema “cho sạch” khi gắn DB cũ.
+- Feature flag integrations; webhook idempotent khi tới P6.

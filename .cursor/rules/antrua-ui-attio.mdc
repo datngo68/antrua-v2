@@ -1,0 +1,33 @@
+---
+description: AnTrua UI — Attio tokens, shadcn, nav, anti-slop (bắt buộc khi đụng UI)
+globs: app/**/*.{tsx,ts,css},components/**/*.{tsx,ts,css},design-system/**/*
+alwaysApply: false
+---
+
+# AnTrua — UI Attio
+
+Source of truth: `design-system/MASTER.md` + `Design.md`. Skills: `design-taste-frontend-v1`, `ui-ux-pro-max`.
+
+## Tokens (không đổi tự ý)
+
+- Brand `#3ABDAF` · Foreground `#1C1D1F` · Muted `#666666` · Border `#EBECF0`
+- Workspace `#F4F5F7` · Card `#FFFFFF` · Destructive/nợ `#DC2626` (không dùng làm brand)
+- Radius 6 / 8 / 12px · Font Geist/Satoshi (**không Inter**)
+
+## Layout
+
+- Desktop sidebar · Mobile bottom nav ≤5 · `min-h-[100dvh]` (**cấm** `h-screen` shell)
+- Mobile: 1 cột, `px-4`, `pb-20` nếu có bottom nav · max content `max-w-[1400px]`
+- Dashboard Bento asymmetric — **cấm** 3 card cột bằng nhau generic
+- Tables: spreadsheet 1px border, header contrast, `tabular-nums` cho VND
+
+## Components
+
+- Ưu tiên shadcn đã map token — hạn chế invent
+- Icons: `@phosphor-icons/react` hoặc Radix — **cấm emoji**
+- Form: label trên, error dưới · States: skeleton / empty / error / `active:scale-[0.98]`
+- Motion 150–300ms; `prefers-reduced-motion`; chỉ `transform`/`opacity`
+
+## Cấm
+
+Purple/violet default · neon glow · gradient text · Unsplash · Inter · emoji icons · custom cursor

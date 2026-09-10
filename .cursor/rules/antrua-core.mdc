@@ -1,0 +1,16 @@
+---
+description: AnTrua core — luôn đọc AGENTS.md, tôn trọng phase/spec, không đổi schema
+alwaysApply: true
+---
+
+# AnTrua — Core
+
+- Đọc `AGENTS.md` trước mọi task. Spec: `docs/superpowers/specs/2026-09-10-antrua-ui-rebuild-design.md`.
+- Domain/schema: `doc-rebuild/` — **không** rename bảng/cột/PK/FK; null semantics giữ nguyên.
+- Làm đúng phase hiện tại (P0…P7). Không làm P1+ khi đang P0 trừ khi user yêu cầu.
+- Multi-tenant: filter `GroupId` cho Admin/User; SuperAdmin optional `groupId`.
+- Password: BCrypt 12 + MD5 hex 32 legacy (`lib/password` khi có).
+- Commits: conventional (`feat|fix|chore|docs|refactor|test`). Không emoji trong commit/docs do agent viết.
+- Secrets: không bịa / không echo. Env từ `.env.example` → `.env.local`.
+- Trước claim done: `npm test` và/hoặc `npm run build` (+ `npm run check:ui` nếu có).
+- Trả lời user bằng tiếng Việt.

@@ -1,0 +1,11 @@
+---
+description: Cấm agent tự thêm emoji vào code, UI, docs, commit
+alwaysApply: true
+---
+
+# No emoji (agent-authored)
+
+- **Cấm** chèn emoji vào: TS/TSX/JS, nhãn nút, copy UI, comment, README, AGENTS, commit message, alt text.
+- Icons: Phosphor / Radix / SVG thuần. Checklist dùng `[x]` / `[ ]`, không dùng ký tự emoji.
+- **Ngoại lệ:** user yêu cầu rõ ràng; hoặc dữ liệu do end-user nhập (không phải agent invent).
+- Sửa file đã có emoji cũ: không nhân rộng; chỉ gỡ khi user yêu cầu.
