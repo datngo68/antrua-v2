@@ -42,7 +42,7 @@ export function LoginForm() {
   return (
     <form onSubmit={onSubmit} className="flex w-full flex-col gap-5">
       <div className="flex flex-col gap-2">
-        <Label htmlFor="username" className="text-foreground">
+        <Label htmlFor="username" className="text-[13px] font-semibold text-foreground">
           Tên đăng nhập
         </Label>
         <Input
@@ -54,13 +54,13 @@ export function LoginForm() {
           onChange={(e) => setUsername(e.target.value)}
           aria-invalid={!!error}
           required
-          className="h-11 rounded-md bg-background px-3 text-sm"
+          className="h-11 rounded-md border-border bg-background px-3 text-sm shadow-none"
           placeholder="vd. ngotiendat"
         />
       </div>
 
       <div className="flex flex-col gap-2">
-        <Label htmlFor="password" className="text-foreground">
+        <Label htmlFor="password" className="text-[13px] font-semibold text-foreground">
           Mật khẩu
         </Label>
         <Input
@@ -72,12 +72,12 @@ export function LoginForm() {
           onChange={(e) => setPassword(e.target.value)}
           aria-invalid={!!error}
           required
-          className="h-11 rounded-md bg-background px-3 text-sm"
+          className="h-11 rounded-md border-border bg-background px-3 text-sm shadow-none"
           placeholder="••••••••"
         />
       </div>
 
-      <label className="flex min-h-11 cursor-pointer items-center gap-2.5 text-sm text-muted">
+      <label className="flex min-h-11 cursor-pointer items-center gap-2.5 text-sm text-[#666666]">
         <input
           type="checkbox"
           checked={remember}

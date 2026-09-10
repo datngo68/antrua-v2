@@ -31,54 +31,55 @@ export default async function LoginPage() {
 
   return (
     <div className="grid min-h-[100dvh] bg-background lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
-      <aside className="relative hidden overflow-hidden bg-[#1C1D1F] text-white lg:flex lg:flex-col lg:justify-between lg:px-12 lg:py-12 xl:px-16">
+      <aside
+        className="relative hidden overflow-hidden text-white lg:flex lg:flex-col lg:justify-between lg:px-12 lg:py-12 xl:px-16"
+        style={{ backgroundColor: "#1C1D1F" }}
+      >
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.14]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 20%, #3ABDAF 0%, transparent 42%), radial-gradient(circle at 85% 70%, #8BC269 0%, transparent 36%)",
-          }}
+          className="pointer-events-none absolute -left-24 -top-24 size-80 rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(58,189,175,0.28), transparent 70%)" }}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              "linear-gradient(#EBECF0 1px, transparent 1px), linear-gradient(90deg, #EBECF0 1px, transparent 1px)",
-            backgroundSize: "48px 48px",
-            maskImage:
-              "radial-gradient(ellipse at center, black 20%, transparent 75%)",
-          }}
+          className="pointer-events-none absolute -bottom-20 -right-16 size-96 rounded-full"
+          style={{ background: "radial-gradient(circle, rgba(139,194,105,0.18), transparent 70%)" }}
         />
 
         <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium tracking-wide text-white/80">
-            <span className="size-1.5 rounded-full bg-brand" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium tracking-wide text-white/90">
+            <span className="size-1.5 rounded-full" style={{ backgroundColor: "#3ABDAF" }} />
             AnTrua · QLTD v2
           </div>
-          <h1 className="mt-8 max-w-md text-4xl font-semibold tracking-tight xl:text-5xl">
+          <h1 className="mt-8 max-w-md text-4xl font-semibold leading-[1.1] tracking-tight xl:text-5xl">
             Quản lý ăn trưa
-            <span className="mt-2 block text-brand">rõ nợ, rõ người.</span>
+            <span className="mt-3 block" style={{ color: "#3ABDAF" }}>
+              rõ nợ, rõ người.
+            </span>
           </h1>
-          <p className="mt-5 max-w-[38ch] text-base leading-relaxed text-white/65">
+          <p className="mt-5 max-w-[38ch] text-base leading-relaxed text-white/70">
             Workspace Attio cho nhóm — chi phí, công nợ và báo cáo trong một
             giao diện gọn.
           </p>
         </div>
 
-        <ul className="relative z-10 mt-12 space-y-4">
+        <ul className="relative z-10 mt-12 space-y-3">
           {highlights.map((item) => (
             <li
               key={item.title}
-              className="flex gap-3 rounded-xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur-[2px]"
+              className="flex gap-3 rounded-xl border border-white/10 bg-white/[0.07] p-4"
             >
-              <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-brand/15 text-brand">
+              <span
+                className="flex size-10 shrink-0 items-center justify-center rounded-lg"
+                style={{ backgroundColor: "rgba(58,189,175,0.18)", color: "#3ABDAF" }}
+              >
                 <item.icon size={20} weight="duotone" />
               </span>
               <div>
-                <p className="text-sm font-semibold tracking-tight">{item.title}</p>
-                <p className="mt-1 text-sm leading-relaxed text-white/55">
+                <p className="text-sm font-semibold tracking-tight text-white">
+                  {item.title}
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-white/60">
                   {item.body}
                 </p>
               </div>
@@ -86,7 +87,7 @@ export default async function LoginPage() {
           ))}
         </ul>
 
-        <p className="relative z-10 mt-10 text-xs text-white/35">
+        <p className="relative z-10 mt-10 text-xs text-white/40">
           Session bảo mật · Multi-tenant theo nhóm
         </p>
       </aside>
