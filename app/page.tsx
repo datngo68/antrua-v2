@@ -1,8 +1,10 @@
+import { AppShell } from "@/components/app-shell";
+
 export default function HomePage() {
   return (
-    <main>
-      <h1>AnTrua</h1>
-      <p>P0 foundation scaffold</p>
-    </main>
+    <AppShell userLabel="Dev">
+      <h1 className="text-2xl font-semibold tracking-tight">Tổng quan</h1>
+      <p className="mt-2 text-muted">Dashboard sẽ có ở P3.</p>
+    </AppShell>
   );
 }
