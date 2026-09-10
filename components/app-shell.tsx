@@ -1,10 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AppSidebar } from "@/components/app-sidebar";
 import { BottomNav } from "@/components/bottom-nav";
 import { cn } from "@/lib/utils";
+
+const STORAGE_KEY = "antrua.sidebar.collapsed";
 
 export function AppShell({
   children,
@@ -15,6 +17,10 @@ export function AppShell({
 }) {
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    setCollapsed(window.localStorage.getItem(STORAGE_KEY) === "1");
+  }, []);
 
   async function onLogout() {
     await fetch("/api/auth/logout", { method: "POST" });
