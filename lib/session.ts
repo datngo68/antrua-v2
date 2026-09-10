@@ -1,5 +1,6 @@
-import { getIronSession, type SessionOptions } from "iron-session";
+import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
+import { getSessionOptions } from "@/lib/session-options";
 
 export type SessionData = {
   userId?: number;
@@ -9,17 +10,8 @@ export type SessionData = {
   groupId?: number | null;
 };
 
-export const sessionOptions: SessionOptions = {
-  password: process.env.SESSION_PASSWORD as string,
-  cookieName: ".AnTrua.Session",
-  cookieOptions: {
-    secure: process.env.NODE_ENV === "production",
-    httpOnly: true,
-    sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 30,
-  },
-};
+export { getSessionOptions } from "@/lib/session-options";
 
 export async function getSession() {
-  return getIronSession<SessionData>(await cookies(), sessionOptions);
+  return getIronSession<SessionData>(await cookies(), getSessionOptions());
 }

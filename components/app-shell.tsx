@@ -11,9 +11,11 @@ const STORAGE_KEY = "antrua.sidebar.collapsed";
 export function AppShell({
   children,
   userLabel,
+  role,
 }: {
   children: React.ReactNode;
   userLabel: string;
+  role: string;
 }) {
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
@@ -32,6 +34,7 @@ export function AppShell({
     <div className="min-h-[100dvh] bg-background">
       <AppSidebar
         userLabel={userLabel}
+        role={role}
         onLogout={onLogout}
         onCollapsedChange={setCollapsed}
       />
@@ -45,7 +48,7 @@ export function AppShell({
           {children}
         </main>
       </div>
-      <BottomNav userLabel={userLabel} onLogout={onLogout} />
+      <BottomNav userLabel={userLabel} role={role} onLogout={onLogout} />
     </div>
   );
 }

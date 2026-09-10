@@ -20,6 +20,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { canManageGroup } from "@/lib/roles";
 import { cn } from "@/lib/utils";
 
 const icons = {
@@ -41,12 +42,17 @@ function isActive(pathname: string, href: string) {
 
 export function BottomNav({
   userLabel,
+  role,
   onLogout,
 }: {
   userLabel: string;
+  role: string;
   onLogout?: () => void;
 }) {
   const pathname = usePathname();
+  const sheetItems = moreNav.filter(
+    (item) => !item.adminOnly || canManageGroup(role),
+  );
 
   return (
     <nav
@@ -91,7 +97,7 @@ export function BottomNav({
                 <p className="text-sm text-[#666666]">{userLabel}</p>
               </SheetHeader>
               <div className="flex flex-col gap-1 px-4 pb-6">
-                {moreNav.map((item) => {
+                {sheetItems.map((item) => {
                   const Icon = moreIcons[item.href as keyof typeof moreIcons];
                   return (
                     <Link

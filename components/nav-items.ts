@@ -5,15 +5,15 @@ export const primaryNav = [
   { href: "/reports", label: "Báo cáo", icon: "ChartBar" },
 ] as const;
 
-/** Desktop sidebar — đủ IA MASTER (Nhóm, Cài đặt). Mobile gom vào sheet “Thêm”. */
+/** Desktop sidebar — đủ IA MASTER (Nhóm Admin+, Cài đặt). */
 export const secondaryNav = [
-  { href: "/group", label: "Nhóm", icon: "Users" },
-  { href: "/settings", label: "Cài đặt", icon: "Gear" },
+  { href: "/group", label: "Nhóm", icon: "Users", adminOnly: true },
+  { href: "/settings", label: "Cài đặt", icon: "Gear", adminOnly: false },
 ] as const;
 
 export const moreNav = [
-  { href: "/group", label: "Nhóm" },
-  { href: "/settings", label: "Cài đặt" },
+  { href: "/group", label: "Nhóm", adminOnly: true },
+  { href: "/settings", label: "Cài đặt", adminOnly: false },
 ] as const;
 
 export type NavIcon =

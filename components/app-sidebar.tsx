@@ -14,6 +14,7 @@ import {
   Users,
 } from "@phosphor-icons/react";
 import { primaryNav, secondaryNav, type NavIcon } from "@/components/nav-items";
+import { canManageGroup } from "@/lib/roles";
 import { cn } from "@/lib/utils";
 
 const icons: Record<NavIcon, typeof House> = {
@@ -80,16 +81,21 @@ function NavLink({
 
 export function AppSidebar({
   userLabel,
+  role,
   onLogout,
   onCollapsedChange,
 }: {
   userLabel: string;
+  role: string;
   onLogout?: () => void;
   onCollapsedChange?: (collapsed: boolean) => void;
 }) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [ready, setReady] = useState(false);
+  const adminItems = secondaryNav.filter(
+    (item) => !item.adminOnly || canManageGroup(role),
+  );
 
   useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
@@ -173,7 +179,7 @@ export function AppSidebar({
           ) : (
             <div className="mx-auto mb-1 h-px w-6 bg-border" aria-hidden />
           )}
-          {secondaryNav.map((item) => (
+          {adminItems.map((item) => (
             <NavLink
               key={item.href}
               href={item.href}

@@ -18,7 +18,8 @@ Seed mặc định: `ngotiendat` / `123456` (SuperAdmin).
 ```bash
 npm test
 npm run build
-node scripts/check-ui-conventions.mjs
+npm run check:ui
+npm run seed          # tạo data/antrua.dev.db nếu chưa có
 ```
 
 ## Tài liệu

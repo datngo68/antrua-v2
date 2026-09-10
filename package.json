@@ -6,7 +6,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "check:ui": "node scripts/check-ui-conventions.mjs",
+    "seed": "node scripts/seed-dev-db.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",

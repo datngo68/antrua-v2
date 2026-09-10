@@ -5,8 +5,8 @@ import {
   Scales,
   Users,
 } from "@phosphor-icons/react/dist/ssr";
-import { AppShell } from "@/components/app-shell";
 import { requireUser } from "@/lib/auth";
+import { canManageGroup } from "@/lib/roles";
 
 const shortcuts = [
   {
@@ -15,6 +15,7 @@ const shortcuts = [
     hint: "CRUD + chia phần — P1",
     icon: Receipt,
     span: "md:col-span-2 md:row-span-2",
+    adminOnly: false,
   },
   {
     href: "/payments",
@@ -22,6 +23,7 @@ const shortcuts = [
     hint: "FIFO + netting — P2",
     icon: Scales,
     span: "md:col-span-1",
+    adminOnly: false,
   },
   {
     href: "/reports",
@@ -29,6 +31,7 @@ const shortcuts = [
     hint: "Confirmed only — P4",
     icon: ChartBar,
     span: "md:col-span-1",
+    adminOnly: false,
   },
   {
     href: "/group",
@@ -36,15 +39,19 @@ const shortcuts = [
     hint: "Thành viên — P5",
     icon: Users,
     span: "md:col-span-2",
+    adminOnly: true,
   },
 ] as const;
 
 export default async function HomePage() {
   const user = await requireUser();
   const first = user.fullName.split(/\s+/).pop() ?? user.fullName;
+  const items = shortcuts.filter(
+    (item) => !item.adminOnly || canManageGroup(user.role),
+  );
 
   return (
-    <AppShell userLabel={user.fullName}>
+    <>
       <header className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.08em] text-primary">
@@ -65,7 +72,7 @@ export default async function HomePage() {
       </header>
 
       <section className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-2 md:gap-4">
-        {shortcuts.map((item) => (
+        {items.map((item) => (
           <Link
             key={item.href}
             href={item.href}
@@ -87,6 +94,6 @@ export default async function HomePage() {
           </Link>
         ))}
       </section>
-    </AppShell>
+    </>
   );
 }

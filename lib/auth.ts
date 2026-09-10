@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { canManageGroup } from "@/lib/roles";
 import { getSession, type SessionData } from "@/lib/session";
 
 export type SessionUser = {
@@ -8,6 +9,8 @@ export type SessionUser = {
   role: string;
   groupId: number | null;
 };
+
+export { canManageGroup } from "@/lib/roles";
 
 export async function getSessionUser(): Promise<SessionUser | null> {
   const session = await getSession();
@@ -26,6 +29,13 @@ export async function getSessionUser(): Promise<SessionUser | null> {
 export async function requireUser(): Promise<SessionUser> {
   const user = await getSessionUser();
   if (!user) redirect("/login");
+  return user;
+}
+
+/** Nhóm (Admin+) — User thường → về tổng quan. */
+export async function requireGroupAdmin(): Promise<SessionUser> {
+  const user = await requireUser();
+  if (!canManageGroup(user.role)) redirect("/");
   return user;
 }
 

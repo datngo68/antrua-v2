@@ -4,7 +4,8 @@ import { toSessionFields } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { verifyPassword } from "@/lib/password";
 import { users } from "@/lib/schema/users";
-import { getSession, sessionOptions } from "@/lib/session";
+import { getSession } from "@/lib/session";
+import { getSessionOptions } from "@/lib/session-options";
 
 export async function POST(request: Request) {
   let body: { username?: string; password?: string; remember?: boolean };
@@ -40,10 +41,11 @@ export async function POST(request: Request) {
   Object.assign(session, toSessionFields(row));
   // ponytail: RememberMeToken table — add when porting legacy remember tokens
   if (body.remember === false) {
+    const opts = getSessionOptions();
     session.updateConfig({
-      ...sessionOptions,
+      ...opts,
       cookieOptions: {
-        ...sessionOptions.cookieOptions,
+        ...opts.cookieOptions,
         maxAge: undefined,
       },
     });
